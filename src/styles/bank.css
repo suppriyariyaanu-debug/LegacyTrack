@@ -1,0 +1,421 @@
+/* Phase 4: bank accounts list, details, add form. Reusable pieces here
+   (summary grid, filter bar, timeline, stacked table) are written so the
+   insurance and claim pages can use them too. */
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Summary cards ---------------------------------------------------------- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Success confirmation banner -------------------------------------------- */
+.alert--success {
+  background: var(--success-bg);
+  color: var(--success-fg);
+}
+
+.alert--success svg {
+  flex-shrink: 0;
+}
+
+.alert__dismiss {
+  display: inline-flex;
+  margin-left: auto;
+  padding: 4px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+}
+
+.alert__dismiss:hover {
+  background: rgba(28, 107, 60, 0.12);
+}
+
+/* Search + filters ------------------------------------------------------- */
+.filter-bar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(0, 1fr)) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-bar__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-subtle);
+}
+
+.filter-bar__search:focus-within {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(20, 128, 123, 0.15);
+}
+
+.filter-bar__search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+}
+
+.filter-bar__count {
+  margin: 14px 0 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.no-results {
+  padding: 36px 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.no-results svg {
+  color: var(--text-subtle);
+}
+
+.no-results__title {
+  margin-top: 8px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.no-results .btn {
+  margin-top: 14px;
+}
+
+.empty-state--wide {
+  max-width: 520px;
+}
+
+/* Table links and clickable rows ----------------------------------------- */
+.table__link {
+  color: var(--text);
+}
+
+.table__link:hover {
+  color: var(--brand-600);
+  text-decoration: underline;
+}
+
+.table__row--link {
+  cursor: pointer;
+}
+
+/* Input with a fixed prefix (masked account number, rupee amount) -------- */
+.input-group {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-group:focus-within {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(20, 128, 123, 0.15);
+}
+
+.input-group.has-error {
+  border-color: var(--error-fg);
+}
+
+.input-group__prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-right: 1px solid var(--border);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: var(--surface-alt);
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.input-group .input,
+.input-group .input:focus {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Notes in a detail list ------------------------------------------------- */
+.detail-list dd.detail-list__note {
+  font-weight: 400;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* Claim timeline --------------------------------------------------------- */
+.timeline-summary {
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+}
+
+.timeline__step {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  padding-bottom: 22px;
+}
+
+.timeline__step:last-child {
+  padding-bottom: 0;
+}
+
+.timeline__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 28px;
+  bottom: 2px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--border);
+}
+
+.timeline__step.is-done:not(:last-child)::before {
+  background: var(--brand-500);
+}
+
+.timeline__marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border: 2px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-subtle);
+}
+
+.timeline__step.is-done .timeline__marker {
+  border-color: var(--brand-500);
+  background: var(--brand-500);
+  color: #fff;
+}
+
+.timeline__step.is-current .timeline__marker {
+  border-color: var(--gold-400);
+  background: var(--gold-400);
+  color: var(--ink-900);
+  box-shadow: 0 0 0 4px rgba(224, 178, 90, 0.25);
+}
+
+.timeline__body {
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.timeline__label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.timeline__step.is-done .timeline__label {
+  color: var(--text);
+}
+
+.timeline__step.is-current .timeline__label {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.timeline__tag {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--warning-bg);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warning-fg);
+}
+
+.timeline__meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.timeline__note {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--warning-bg);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--warning-fg);
+}
+
+/* Document rows with a done / to-do mark --------------------------------- */
+.doc-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doc-name__mark {
+  display: inline-flex;
+  color: var(--border-strong);
+}
+
+.doc-name__mark.is-done {
+  color: var(--success-fg);
+}
+
+.case-strip__value .badge {
+  vertical-align: middle;
+}
+
+/* Wide tables: keep references on one line, let long headers wrap -------- */
+.table--stack-lg th {
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+.table--stack-lg th,
+.table--stack-lg td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.table--stack-lg .table__secondary {
+  white-space: nowrap;
+}
+
+/* Stacked-row labels stay regular weight even in bold numeric cells */
+.table td::before {
+  font-weight: 400;
+}
+
+/* Wide tables: stack rows into cards earlier than the 640px default ------ */
+@media (max-width: 1320px) {
+  .table--stack-lg thead {
+    display: none;
+  }
+
+  .table--stack-lg,
+  .table--stack-lg tbody,
+  .table--stack-lg tr,
+  .table--stack-lg td {
+    display: block;
+  }
+
+  .table--stack-lg tbody {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 12px;
+  }
+
+  .table--stack-lg tr,
+  .table--stack-lg tbody tr:last-child {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .table--stack-lg td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 5px 0;
+    border: 0;
+    text-align: right;
+  }
+
+  .table--stack-lg td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: left;
+  }
+
+  .table--stack-lg td:first-child {
+    display: block;
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .table--stack-lg td:first-child::before,
+  .table--stack-lg td.table__action::before {
+    content: none;
+  }
+
+  .table--stack-lg td:first-child .table__primary {
+    font-size: 15px;
+  }
+
+  .table--stack-lg td.table__action {
+    margin-top: 8px;
+  }
+
+  .table--stack-lg td.table__action .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1180px) {
+  .filter-bar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .filter-bar__search {
+    grid-column: 1 / -1;
+  }
+
+  .filter-bar__clear {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 1100px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .summary-grid {
+    gap: 12px;
+  }
+
+  .filter-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Dashboard: "and N more" line under the outstanding documents ----------- */
+.doc-list li.doc-list__more {
+  font-size: 13px;
+  color: var(--text-muted);
+}

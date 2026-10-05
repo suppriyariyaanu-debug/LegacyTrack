@@ -1,0 +1,477 @@
+/* Logo ------------------------------------------------------------------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo__mark {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo__name {
+  font-family: var(--font-brand);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--ink-900);
+}
+
+.logo__name span {
+  color: var(--brand-600);
+}
+
+.logo--light .logo__name {
+  color: #fff;
+}
+
+.logo--light .logo__name span {
+  color: var(--gold-400);
+}
+
+.logo__tagline {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Buttons ---------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn--primary {
+  background: var(--brand-600);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--brand-700);
+}
+
+.btn--secondary {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.btn--secondary:hover {
+  background: var(--surface-alt);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.icon-btn:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+.sidebar .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+/* Avatar ----------------------------------------------------------------- */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--brand-100);
+  color: var(--brand-700);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Panels ----------------------------------------------------------------- */
+.panel {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel__header h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.panel__header p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.panel__empty {
+  padding: 16px 0;
+  color: var(--text-muted);
+}
+
+/* Status badge ----------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--neutral-bg);
+  color: var(--neutral-fg);
+}
+
+.badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge--info {
+  background: var(--info-bg);
+  color: var(--info-fg);
+}
+
+.badge--progress {
+  background: var(--progress-bg);
+  color: var(--progress-fg);
+}
+
+.badge--success {
+  background: var(--success-bg);
+  color: var(--success-fg);
+}
+
+.badge--warning {
+  background: var(--warning-bg);
+  color: var(--warning-fg);
+}
+
+/* Stat card -------------------------------------------------------------- */
+.stat-card {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+  border-radius: var(--radius);
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.stat-card__icon--info {
+  background: var(--info-bg);
+  color: var(--info-fg);
+}
+
+.stat-card__icon--success {
+  background: var(--success-bg);
+  color: var(--success-fg);
+}
+
+.stat-card__icon--warning {
+  background: var(--warning-bg);
+  color: var(--warning-fg);
+}
+
+.stat-card__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.stat-card__value {
+  margin-top: 2px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-card__hint {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-subtle);
+}
+
+/* Claim progress --------------------------------------------------------- */
+.claim-progress {
+  min-width: 132px;
+}
+
+.claim-progress__track {
+  display: flex;
+  gap: 3px;
+}
+
+.claim-progress__step {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+}
+
+.claim-progress__step.is-done {
+  background: var(--brand-500);
+}
+
+.claim-progress__step.is-current {
+  background: var(--gold-400);
+}
+
+.claim-progress__label {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Table ------------------------------------------------------------------ */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table tbody tr:hover {
+  background: var(--surface-alt);
+}
+
+.table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table__primary {
+  font-weight: 600;
+}
+
+.table__secondary {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Small screens: each row becomes a stacked card */
+@media (max-width: 640px) {
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+  }
+
+  .table tr {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 5px 0;
+    border: 0;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .table td:first-child::before {
+    content: none;
+  }
+
+  .table .num {
+    text-align: right;
+  }
+
+  .claim-progress {
+    text-align: right;
+  }
+}
+
+/* Alerts ----------------------------------------------------------------- */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+
+.alert--error {
+  background: var(--error-bg);
+  color: var(--error-fg);
+}
+
+/* Empty / error state ---------------------------------------------------- */
+.empty-state {
+  max-width: 440px;
+  margin: 64px auto;
+  padding: 40px 28px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  text-align: center;
+}
+
+.empty-state__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.empty-state__icon--error {
+  background: var(--error-bg);
+  color: var(--error-fg);
+}
+
+.empty-state h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  margin: 8px 0 20px;
+  color: var(--text-muted);
+}
+
+/* Skeleton loading ------------------------------------------------------- */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #e9edf1 25%, #f4f6f8 37%, #e9edf1 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+.skeleton--chip {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+}
+
+.skeleton--line {
+  height: 12px;
+  margin-top: 8px;
+}
+
+.skeleton--title {
+  height: 24px;
+  margin-top: 8px;
+}
+
+.skeleton--row {
+  height: 44px;
+  margin-top: 10px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

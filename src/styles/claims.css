@@ -1,0 +1,154 @@
+/* Phase 6: unified claims list, claim details, Dashboard claims overview. */
+
+/* Asset type badge (Bank / Insurance) ------------------------------------ */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px 3px 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.type-badge--bank svg {
+  color: var(--brand-600);
+}
+
+.type-badge--insurance svg {
+  color: var(--progress-fg);
+}
+
+/* Dense variant for the nine-column claims table -------------------------- */
+.table--dense {
+  font-size: 13px;
+}
+
+.table--dense th,
+.table--dense td {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* "Next step" call to action ---------------------------------------------- */
+.next-step {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.next-step__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  background: var(--info-bg);
+  color: var(--info-fg);
+}
+
+.next-step--warning {
+  border-color: #f2d9a6;
+  background: #fffaf0;
+}
+
+.next-step--warning .next-step__icon {
+  background: var(--warning-bg);
+  color: var(--warning-fg);
+}
+
+.next-step--success .next-step__icon {
+  background: var(--success-bg);
+  color: var(--success-fg);
+}
+
+.next-step__text {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.next-step__title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.next-step__text > p:last-child {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Sections the "next step" button jumps to; keep them clear of the header */
+.anchor-target {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.anchor-target:focus {
+  outline: none;
+}
+
+.anchor-target:focus-visible {
+  box-shadow: 0 0 0 3px rgba(20, 128, 123, 0.25);
+}
+
+/* Dashboard claims overview ---------------------------------------------- */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--border);
+}
+
+.mini-stats > div {
+  padding: 12px 14px;
+  background: var(--surface-alt);
+}
+
+.mini-stats dt {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.mini-stats dd {
+  margin-top: 2px;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.claims-overview__subtitle {
+  margin: 20px 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+@media (max-width: 1100px) {
+  .mini-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .mini-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .next-step .btn {
+    width: 100%;
+  }
+}
