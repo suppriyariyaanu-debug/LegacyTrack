@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ConfirmDialog from '../components/ui/ConfirmDialog';
 import Icon from '../components/ui/Icon';
 import PageHeader from '../components/ui/PageHeader';
 import Toggle from '../components/ui/Toggle';
 import { useAuth } from '../context/AuthContext';
 import { DEFAULT_CASE_ID, useActiveCase } from '../context/CaseContext';
+import { useKyc } from '../context/KycContext';
 import { getDeceasedPerson, getPreferences, resetDemoData, setPreference } from '../services/api';
 
 const PREFERENCES = [
@@ -29,6 +30,8 @@ const PREFERENCES = [
 export default function Settings() {
   const { user } = useAuth();
   const { activeId, setActiveId } = useActiveCase();
+  const { resetKyc } = useKyc();
+  const navigate = useNavigate();
   const [state, setState] = useState({ status: 'loading', person: null, preferences: null });
   const [confirmReset, setConfirmReset] = useState(false);
   const [resetting, setResetting] = useState(false);
@@ -69,8 +72,9 @@ export default function Settings() {
     try {
       await resetDemoData();
       setActiveId(DEFAULT_CASE_ID);
-      setNotice('Demo data has been reset to the original sample case.');
-      load();
+      // The demo KYC is part of the demo state: clear it and start again there.
+      resetKyc();
+      navigate('/kyc', { replace: true, state: { reset: true } });
     } catch {
       setError('We could not reset the demo data. Please try again.');
     } finally {
@@ -227,7 +231,8 @@ export default function Settings() {
           <h3>Demo data</h3>
           <p>
             Everything in LegacyTrack is fictional sample data kept in this browser tab. Resetting
-            restores the original Rajesh Kumar case and removes anything added during the demo.
+            restores the original Rajesh Kumar case, removes anything added during the demo and
+            clears the demo KYC, so you will be asked to verify again.
           </p>
         </div>
         <button
@@ -243,7 +248,7 @@ export default function Settings() {
       <ConfirmDialog
         open={confirmReset}
         title="Reset demo data?"
-        message="Cases, accounts, policies, uploads and notifications added during this demo will be removed and the original sample data restored."
+        message="Cases, accounts, policies, uploads and notifications added during this demo will be removed, the original sample data restored and the demo KYC cleared."
         confirmLabel="Reset"
         cancelLabel="Cancel"
         danger

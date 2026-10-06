@@ -1,0 +1,203 @@
+/* Legal Heir KYC (demo). Reuses the sign-in layout (.login) and the shared
+   form, badge, alert and detail-list styles. */
+
+.kyc__panel {
+  align-items: flex-start;
+  padding-top: 56px;
+  padding-bottom: 56px;
+  overflow-y: auto;
+}
+
+.kyc__card {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+}
+
+.kyc__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kyc__top .login__mobile-logo {
+  margin-bottom: 0;
+}
+
+.kyc__demo-badge {
+  margin-left: auto;
+}
+
+.kyc h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.kyc__lead {
+  margin: 6px 0 20px;
+  color: var(--text-muted);
+}
+
+.kyc .alert {
+  margin-bottom: 16px;
+}
+
+.kyc__note {
+  margin-bottom: 20px;
+}
+
+.kyc__note strong {
+  color: var(--text);
+}
+
+.kyc__actions {
+  display: grid;
+  gap: 10px;
+}
+
+.kyc__signout {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.kyc__signout button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+}
+
+/* Progress steps on the brand panel -------------------------------------- */
+.kyc-steps {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.kyc-steps__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #9aa8b6;
+}
+
+.kyc-steps__marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.kyc-steps__item.is-done {
+  color: #e6ecf1;
+}
+
+.kyc-steps__item.is-done .kyc-steps__marker {
+  border-color: var(--brand-500);
+  background: var(--brand-500);
+  color: #fff;
+}
+
+.kyc-steps__item.is-current {
+  font-weight: 600;
+  color: #fff;
+}
+
+.kyc-steps__item.is-current .kyc-steps__marker {
+  border-color: var(--gold-400);
+  background: var(--gold-400);
+  color: var(--ink-900);
+}
+
+/* Simulated verification in progress ------------------------------------- */
+.kyc-verifying {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.kyc-verifying__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.kyc-spinner {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border: 3px solid var(--brand-100);
+  border-top-color: var(--brand-600);
+  border-radius: 50%;
+  animation: kyc-spin 0.8s linear infinite;
+}
+
+@keyframes kyc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success ---------------------------------------------------------------- */
+.kyc-success {
+  text-align: center;
+}
+
+.kyc-success__facts {
+  margin: 4px 0 24px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  text-align: left;
+}
+
+.kyc-success .form-note {
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .kyc__panel {
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .kyc__demo-badge {
+    margin-left: 0;
+  }
+
+  .kyc-success__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Keep the form steady: a hint and the error that replaces it take the same
+   room, so the Verify button does not move while a field is being checked. */
+.kyc__grid .form-field__hint,
+.kyc__grid .form-field__error {
+  min-height: 36px;
+}
+
+.kyc__grid {
+  row-gap: 8px;
+}

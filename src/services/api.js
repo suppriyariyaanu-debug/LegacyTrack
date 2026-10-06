@@ -18,7 +18,7 @@ import {
 } from '../data/constants';
 import { store } from '../data/store';
 import { nowIso, todayIso } from '../utils/format';
-import { maskPan, maskPhone } from '../utils/mask';
+import { maskAadhaar, maskPan, maskPhone } from '../utils/mask';
 import {
   canSubmit,
   isOutstanding,
@@ -880,6 +880,31 @@ export function searchCase(caseId, query) {
         items: group.items.slice(0, SEARCH_LIMIT),
       })),
     120,
+  );
+}
+
+/* Legal heir KYC (demo) -------------------------------------------------- */
+
+const KYC_DELAY_MS = 1600;
+
+/**
+ * Future: POST /api/kyc/verify
+ *
+ * DEMONSTRATION ONLY: waits briefly and reports success. Nothing is sent to
+ * UIDAI, the Income Tax Department, a bank or any KYC provider, and nothing is
+ * checked against real records. The reply holds masked values only, so the
+ * full PAN, Aadhaar and mobile numbers are never kept.
+ */
+export function verifyKyc(values) {
+  return respond(
+    {
+      fullName: values.fullName.trim(),
+      maskedMobile: maskPhone(values.mobile),
+      maskedPan: maskPan(values.pan),
+      maskedAadhaar: maskAadhaar(values.aadhaar),
+      verifiedOn: todayIso(),
+    },
+    KYC_DELAY_MS,
   );
 }
 

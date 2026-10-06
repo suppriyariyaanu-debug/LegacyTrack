@@ -259,3 +259,41 @@ export function validateInsurancePolicy(values, existing, today) {
 
   return errors;
 }
+
+/* Legal heir KYC (demo) -------------------------------------------------- */
+
+const AADHAAR_PATTERN = /^[0-9]{12}$/;
+
+export const KYC_FIELD_ORDER = ['fullName', 'dateOfBirth', 'mobile', 'pan', 'aadhaar'];
+
+/**
+ * Validates the demo KYC form. These are format checks only — nothing is
+ * looked up or verified against any real record.
+ */
+export function validateKyc(values, today) {
+  const errors = {};
+  const set = (key, message) => {
+    if (message) errors[key] = message;
+  };
+
+  set('fullName', personName(values.fullName, 'your full name'));
+
+  if (!values.dateOfBirth) set('dateOfBirth', 'Enter your date of birth.');
+  else if (!isRealDate(values.dateOfBirth)) set('dateOfBirth', 'Enter a valid date.');
+  else if (values.dateOfBirth > today) set('dateOfBirth', 'Date of birth cannot be in the future.');
+  else if (values.dateOfBirth < EARLIEST_DATE) set('dateOfBirth', 'Enter a date after 01/01/1900.');
+
+  if (!values.mobile.trim()) set('mobile', 'Enter your mobile number.');
+  else if (!MOBILE_PATTERN.test(normalisePhone(values.mobile)))
+    set('mobile', 'Enter a valid 10-digit mobile number starting with 6, 7, 8 or 9.');
+
+  const pan = values.pan.trim().toUpperCase();
+  if (!pan) set('pan', 'Enter your PAN number.');
+  else if (!PAN_PATTERN.test(pan)) set('pan', 'PAN must be 10 characters in the format ABCDE1234F.');
+
+  const aadhaar = values.aadhaar.replace(/\s/g, '');
+  if (!aadhaar) set('aadhaar', 'Enter your Aadhaar number.');
+  else if (!AADHAAR_PATTERN.test(aadhaar)) set('aadhaar', 'Aadhaar number must be exactly 12 digits.');
+
+  return errors;
+}

@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { CaseProvider } from './context/CaseContext';
+import { KycProvider } from './context/KycContext';
 import { NotificationsProvider } from './context/NotificationsContext';
 import './styles/tokens.css';
 import './styles/global.css';
@@ -17,16 +18,19 @@ import './styles/bank.css';
 import './styles/claims.css';
 import './styles/documents.css';
 import './styles/shell.css';
+import './styles/kyc.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <CaseProvider>
-          <NotificationsProvider>
-            <App />
-          </NotificationsProvider>
-        </CaseProvider>
+        <KycProvider>
+          <CaseProvider>
+            <NotificationsProvider>
+              <App />
+            </NotificationsProvider>
+          </CaseProvider>
+        </KycProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -14,10 +14,12 @@ import Documents from './pages/Documents';
 import InsurancePolicies from './pages/InsurancePolicies';
 import InsurancePolicyDetails from './pages/InsurancePolicyDetails';
 import InsurancePolicyForm from './pages/InsurancePolicyForm';
+import KycVerification from './pages/KycVerification';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Notifications from './pages/Notifications';
 import Settings from './pages/Settings';
+import KycRoute from './routes/KycRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 export default function App() {
@@ -26,6 +28,10 @@ export default function App() {
       <Route path="/login" element={<Login />} />
 
       <Route element={<ProtectedRoute />}>
+        {/* Signed in, but the legal heir KYC (demo) comes before the application. */}
+        <Route path="/kyc" element={<KycVerification />} />
+
+        <Route element={<KycRoute />}>
         <Route element={<AppLayout />}>
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -52,6 +58,7 @@ export default function App() {
           <Route path="/settings" element={<Settings />} />
 
           <Route path="*" element={<NotFound />} />
+        </Route>
         </Route>
       </Route>
     </Routes>

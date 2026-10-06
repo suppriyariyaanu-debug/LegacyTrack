@@ -26,6 +26,8 @@ does not send emails or alerts. Actions such as *Submit Claim*, *Upload Document
 
 ## Current Scope
 
+- **Legal Heir KYC (demo)** — a simulated identity step between sign-in and the
+  application; format validation only, masked values, no external KYC service
 - **Deceased Person Management** — registration with validation, case details, case list
   and switching between cases
 - **Bank Accounts** — list, search and filters, details, add account
@@ -82,8 +84,10 @@ src/
   routes/
     navigation.js        Sidebar items and page titles
     ProtectedRoute.jsx   Redirects signed-out users to /login
+    KycRoute.jsx         Redirects to /kyc until the demo KYC is completed
   context/
     AuthContext.jsx      Demo sign-in
+    KycContext.jsx       Demo legal heir KYC state for the session
     CaseContext.jsx      The active case
     NotificationsContext.jsx  Unread count for the header
   services/

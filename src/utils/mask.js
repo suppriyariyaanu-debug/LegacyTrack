@@ -19,3 +19,8 @@ export function normalisePhone(phone) {
 export function maskPhone(phone) {
   return `+91 XXXXXX${normalisePhone(phone).slice(-4)}`;
 }
+
+/** "1234 5678 9012" -> "XXXX XXXX 9012" */
+export function maskAadhaar(aadhaar) {
+  return `XXXX XXXX ${aadhaar.replace(/\D/g, '').slice(-4)}`;
+}
